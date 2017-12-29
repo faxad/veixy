@@ -1,0 +1,188 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="top_mp_m.master.cs" Inherits="top_mp" %>
+
+<%@ Register Assembly="RadMenu.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="My_StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript">
+function IMG1_onclick() {
+
+}
+
+function DIV1_onclick() {
+
+}
+    </script>
+</head>
+<body style="font-size: small">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="True">
+        </asp:ScriptManager>
+        <div>
+            &nbsp;&nbsp;
+        <div style="z-index: 101; left: 167px; width: 775px; position: absolute; top: 223px; height: 234px">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+            &nbsp;&nbsp;
+        <div style="z-index: 102; left: 9px; width: 100px; position: absolute; top: 8px; height: 100px">
+            <img src="Images/main_pic5.jpg" />
+            <div id="DIV1" style="z-index: 101; left: 547px; width: 385px; position: absolute; top: 0px; height: 100px"
+                onclick="return DIV1_onclick()">
+                <asp:Panel ID="Panel1" runat="server">
+                    <table border="0" cellpadding="0" cellspacing="0" style="font-size: 9pt">
+                        <tr>
+                            <td align="center" colspan="8" style="font-size: 9pt; height: 16px">
+                                <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="True" ForeColor="Gray"
+                                    OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged" RepeatDirection="Horizontal"
+                                    Style="font-size: 9pt">
+                                    <asp:ListItem>Customer</asp:ListItem>
+                                    <asp:ListItem Selected="True">Staff Member</asp:ListItem>
+                                    <asp:ListItem>Administrator</asp:ListItem>
+                                </asp:RadioButtonList></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 9pt; width: 63px; height: 16px">Username:</td>
+                            <td style="width: 100px; height: 16px">
+                                <asp:TextBox ID="TextBox1" runat="server" Style="font-size: 9pt" Width="95px">john_literal</asp:TextBox></td>
+                            <td style="width: 70px; height: 16px">&nbsp;Password:</td>
+                            <td style="height: 16px">
+                                <asp:TextBox ID="TextBox2" runat="server" Width="95px" TextMode="Password">john_literal</asp:TextBox></td>
+                            <td style="width: 27px; height: 16px"></td>
+                            <td style="width: 26px; height: 16px">&nbsp;
+                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/send_but.jpg" /></td>
+                            <td style="width: 100px; height: 16px">&nbsp;<asp:LinkButton ID="LinkButton14" runat="server" CommandName="Update" CssClass="bar_format"
+                                Font-Bold="True" Font-Size="Small" Font-Underline="False" ForeColor="OliveDrab"
+                                Height="21px" OnClick="LinkButton14_Click" Width="41px">Log-In</asp:LinkButton></td>
+                            <td style="width: 100px; height: 16px"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="height: 16px">
+                                <asp:Label ID="statuss" runat="server" ForeColor="Maroon" Text="Status:" Visible="False"
+                                    Width="294px"></asp:Label></td>
+                            <td style="width: 100px; height: 16px;"></td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+                <asp:Panel ID="Panel2" runat="server" Visible="False" Width="387px">
+                    <br />
+                    <table>
+                        <tr>
+                            <td style="width: 214px"></td>
+                            <td style="width: 56px">Welcome,</td>
+                            <td align="left" style="width: 100px">&nbsp;
+                                <asp:Label ID="Label1" runat="server" ForeColor="Gray" Text="Label" Width="95px"></asp:Label></td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+            </div>
+        </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div style="z-index: 104; left: 169px; width: 770px; position: absolute; top: 188px; height: 17px">
+            Today is:
+            <asp:Label ID="label_date" runat="server" Text="Label" ForeColor="SteelBlue"></asp:Label>&nbsp;
+        </div>
+        <br />
+        <div style="z-index: 105; left: 169px; width: 772px; position: absolute; top: 195px; height: 1px">
+            <img src="Images/line2.jpg" style="width: 594px" />
+            <asp:LinkButton ID="LinkButton1" runat="server" Font-Underline="False" PostBackUrl="~/cust_settings.aspx" ForeColor="SteelBlue">Settings</asp:LinkButton>
+            <img src="Images/lint_v.jpg" />
+            <asp:LinkButton ID="LinkButton2" runat="server" Font-Underline="False" ForeColor="SteelBlue"
+                OnClick="LinkButton2_Click">Logout</asp:LinkButton>
+            <img src="Images/lint_v.jpg" />&nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" Font-Underline="False" ForeColor="SteelBlue"
+                NavigateUrl="~/cust_help.aspx">Help</asp:HyperLink>
+            <img src="Images/help.jpg" style="width: 21px; height: 21px" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div style="z-index: 103; left: 8px; width: 92px; position: absolute; top: 191px; height: 100px">
+            <rad:RadMenu ID="RadMenu1" runat="server" Flow="Vertical" Height="233px" OnItemClick="RadMenu1_ItemClick"
+                Skin="Telerik" Style="left: 3px; top: -21px" Width="145px">
+                <DefaultGroupSettings ExpandDirection="Right" />
+                <CollapseAnimation Type="OutSine" />
+                <ExpandAnimation Type="InSine" />
+                <Items>
+                    <rad:RadMenuItem runat="server" BorderColor="WhiteSmoke" Font-Bold="True" NavigateUrl="cust_main.aspx"
+                        Text="Home" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_inbox.aspx" Text="Inbox"
+                        Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_compose.aspx"
+                        Text="Compose" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_track.aspx" Text="Track Request"
+                        Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_products.aspx"
+                        Text="My Products" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_payment.aspx"
+                        Text="Payment Detail" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_callreq.aspx"
+                        Text="Call Back Request" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_mycall.aspx" Text="My Calls"
+                        Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_appoint.aspx"
+                        Text="Appointments" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" Text="Message Box" Width="143px">
+                        <GroupSettings ExpandDirection="Right" />
+                        <Items>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_msgbox.aspx" Text="Inbox" Width="120px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_mcompose.aspx?case=0" Text="Compose" Width="120px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_draftbox.aspx" Text="Drafts" Width="100px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_sentbox.aspx" Text="Sent Items"
+                                Width="100px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_delbox.aspx" Text="Deleted Items"
+                                Width="100px">
+                            </rad:RadMenuItem>
+                        </Items>
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_complaint.aspx"
+                        Text="Complaint Box" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server">
+                    </rad:RadMenuItem>
+                </Items>
+            </rad:RadMenu>
+        </div>
+        <br />
+        <br />
+        <br />
+        &nbsp;
+        <div style="z-index: 103; left: 8px; width: 92px; position: absolute; top: 191px; height: 100px">
+            &nbsp;
+            <div style="z-index: 102; left: 3px; width: 174px; position: absolute; top: 222px; height: 100px">
+                <img src="Images/menu_ext.jpg" style="width: 145px" />
+            </div>
+        </div>
+        &nbsp;
+    </form>
+</body>
+</html>

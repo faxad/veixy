@@ -1,0 +1,642 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="user_mp.master.cs" Inherits="staff_mp" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        &nbsp;<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="True">
+        </asp:ScriptManager>
+        <div>
+            <div style="z-index: 102; left: 214px; width: 775px; position: absolute; top: 11px; height: 4px; font-size: 2px; color: #6699ff; background-color: #006699;">
+            </div>
+            <table>
+                <tr>
+                    <td style="width: 12px; height: 49px;">
+                        <div style="z-index: 111; left: 39px; width: 100px; position: absolute; top: 2px; height: 100px">
+                            <img id="IMG1" onclick="return IMG1_onclick()" src="Images/logo_s.jpg" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            &nbsp;<br />
+            <br />
+            &nbsp;
+        <div style="z-index: 101; left: 203px; width: 597px; position: absolute; top: 117px; height: 100px">
+            &nbsp;<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                &nbsp;
+            </asp:ContentPlaceHolder>
+        </div>
+            <div style="z-index: 103; left: 804px; width: 147px; position: absolute; top: 17px; height: 26px">
+
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="SteelBlue"
+                            BorderWidth="1px" Font-Names="Verdana" Font-Size="7pt" ForeColor="Black" Height="145px"
+                            NextPrevFormat="ShortMonth" SelectionMode="None" Width="181px">
+                            <SelectedDayStyle BackColor="#C0FFC0" ForeColor="White" />
+                            <TodayDayStyle BackColor="Ivory" BorderWidth="1px" />
+                            <OtherMonthDayStyle ForeColor="#999999" />
+                            <NextPrevStyle Font-Bold="True" Font-Size="7pt" ForeColor="OliveDrab" VerticalAlign="Bottom" />
+                            <DayHeaderStyle Font-Bold="True" Font-Size="7pt" />
+                            <TitleStyle BackColor="White" BorderColor="Black" BorderWidth="4px" Font-Bold="True"
+                                Font-Size="7pt" ForeColor="SteelBlue" />
+                        </asp:Calendar>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div style="z-index: 101; left: -590px; width: 570px; position: absolute; top: 0px; height: 100px">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="loc_sno"
+                                DataSourceID="SqlDataSource1" Font-Size="Small" GridLines="None" AllowPaging="True" PageSize="4" Width="584px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                                <Columns>
+                                    <asp:BoundField DataField="user_loc_id" HeaderText="Locked " SortExpression="user_loc_id">
+                                        <ItemStyle Width="50px" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="loc_type" HeaderText="Items" SortExpression="loc_type">
+                                        <HeaderStyle HorizontalAlign="Left" />
+                                        <ItemStyle Width="50px" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="loc_topic" SortExpression="loc_topic">
+                                        <ItemStyle Width="400px" />
+                                    </asp:BoundField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/unlock.jpg"
+                                                OnClick="ImageButton1_Click" />
+                                        </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Right" />
+                                    </asp:TemplateField>
+                                </Columns>
+                                <HeaderStyle BackColor="SteelBlue" Font-Bold="True" ForeColor="White" />
+                                <EmptyDataTemplate>
+                                    <img src="Images/e_lock.jpg" />&nbsp;<br />
+                                    <br />
+                                    <br />
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="width: 191px"></td>
+                                            <td style="width: 110px">
+                                                <asp:Label ID="Label10" runat="server" ForeColor="Silver" Text="You have no locked items in your list."
+                                                    Width="207px"></asp:Label></td>
+                                            <td style="width: 100px"></td>
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                                ConnectionString="<%$ ConnectionStrings:CRM_dbConnectionString %>" DeleteCommand="DELETE FROM [staff_loc] WHERE [loc_sno] = @original_loc_sno"
+                                InsertCommand="INSERT INTO [staff_loc] ([user_loc_id], [loc_by], [loc_topic], [loc_type]) VALUES (@user_loc_id, @loc_by, @loc_topic, @loc_type)"
+                                OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT * FROM [staff_loc] WHERE ([loc_by] = @loc_by)"
+                                UpdateCommand="UPDATE [staff_loc] SET [user_loc_id] = @user_loc_id, [loc_by] = @loc_by, [loc_topic] = @loc_topic, [loc_type] = @loc_type WHERE [loc_sno] = @original_loc_sno">
+                                <DeleteParameters>
+                                    <asp:Parameter Name="original_loc_sno" Type="Decimal" />
+                                </DeleteParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="user_loc_id" Type="Decimal" />
+                                    <asp:Parameter Name="loc_by" Type="String" />
+                                    <asp:Parameter Name="loc_topic" Type="String" />
+                                    <asp:Parameter Name="loc_type" Type="String" />
+                                    <asp:Parameter Name="original_loc_sno" Type="Decimal" />
+                                </UpdateParameters>
+                                <InsertParameters>
+                                    <asp:Parameter Name="user_loc_id" Type="Decimal" />
+                                    <asp:Parameter Name="loc_by" Type="String" />
+                                    <asp:Parameter Name="loc_topic" Type="String" />
+                                    <asp:Parameter Name="loc_type" Type="String" />
+                                </InsertParameters>
+                                <SelectParameters>
+                                    <asp:SessionParameter Name="loc_by" SessionField="user_session" Type="String" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                            <div style="z-index: 101; left: 216px; width: 100px; position: absolute; top: 56px; height: 100px">
+                                <asp:UpdateProgress ID="UpdateProgress2" runat="server" DisplayAfter="1" AssociatedUpdatePanelID="UpdatePanel2">
+                                    <ProgressTemplate>
+                                        <table>
+                                            <tr>
+                                                <td style="width: 762px; height: 22px;"></td>
+                                                <td style="height: 22px">
+                                                    <img src="Images/ajax-loader2.gif" />&nbsp;</td>
+                                                <td style="width: 100px; height: 22px;">
+                                                    <img src="Images/still-loading.gif" /></td>
+                                            </tr>
+                                        </table>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                            <div id="Div3" onclick="return DIV1_onclick()" style="z-index: 101; left: -48px; width: 161px; position: absolute; top: 89px; height: 59px">
+                                <asp:Panel ID="Panel4" runat="server" Height="23px" Width="155px">
+                                    <br />
+                                    <table style="font-size: small; width: 192px">
+                                        <tr>
+                                            <td style="width: 77px; height: 19px">Customer ID:</td>
+                                            <td align="left" style="width: 100px; height: 19px">&nbsp;
+                                            <asp:Label ID="Label32" runat="server" ForeColor="Gray" Text="Label" Width="95px"></asp:Label></td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                &nbsp;
+            <div style="z-index: 102; left: 19px; width: 1px; position: absolute; top: 74px; height: 100px">
+                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1"
+                    DisplayAfter="1">
+                    <ProgressTemplate>
+                        <table>
+                            <tr>
+                                <td style="width: 762px; height: 22px;"></td>
+                                <td style="height: 22px">
+                                    <img src="Images/ajax-loader2.gif" />&nbsp;</td>
+                                <td style="width: 100px; height: 22px;">
+                                    <img src="Images/still-loading.gif" /></td>
+                            </tr>
+                        </table>
+                        &nbsp;
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+            </div>
+            <div style="z-index: 104; left: 9px; width: 158px; position: absolute; top: 70px; height: 338px">
+                <br />
+                <br />
+                <cc1:Accordion ID="Accordion1" runat="server" AutoSize="none" FadeTransitions="true"
+                    FramesPerSecond="40" SelectedIndex="0" TransitionDuration="240">
+                    <Panes>
+                        <cc1:AccordionPane ID="AccordionPane0" runat="server">
+                            <Header>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-top: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: white; border-bottom: white 1px solid; background-color: steelblue"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 81px; height: 15px"></td>
+                                            <td style="width: 74px; height: 15px">Customer's</td>
+                                            <td style="width: 100px; height: 15px">Menu</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Header>
+                            <Content>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-top: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: steelblue; background-color: whitesmoke"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 19px; height: 15px"></td>
+                                            <td style="width: 42px; height: 15px">Ticket</td>
+                                            <td style="width: 100px; height: 15px">Management</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-left: steelblue 1px solid"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="height: 165px"></td>
+                                            <td style="width: 100px; height: 165px">
+                                                <asp:TreeView ID="TreeView1" runat="server" BorderStyle="None" BorderWidth="0px"
+                                                    Font-Size="Small" ForeColor="Black" Style="border-left-width: 1px; border-left-color: steelblue; border-top-style: none; border-right-width: 1px; border-right-color: steelblue; border-bottom-style: none"
+                                                    Width="152px">
+                                                    <HoverNodeStyle ForeColor="Silver" />
+                                                    <Nodes>
+                                                        <asp:TreeNode NavigateUrl="~/staff_inbox.aspx" Text="Ticket Inbox" Value="New Node"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_ihold.aspx" Text="Held Tickets" Value="Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_iahold.aspx" Text="All Held Tickets" Value="All Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_ilocked.aspx" Text="Locked Tickets" Value="Locked Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_ialocked.aspx" Text="All Locked Tickets" Value="All Locked Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_iclosed.aspx" Text="Closed Tickets" Value="Closed Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_icustom.aspx" Text="Filtered Tickets" Value="Filtered Tickets"></asp:TreeNode>
+                                                    </Nodes>
+                                                </asp:TreeView>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: steelblue; background-color: whitesmoke"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 26px; height: 15px"></td>
+                                            <td style="width: 74px; height: 15px">Customer</td>
+                                            <td style="width: 100px; height: 15px">Services</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-left: steelblue 1px solid; border-bottom: steelblue 1px solid"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 1px"></td>
+                                            <td style="width: 100px">
+                                                <asp:TreeView ID="TreeView2" runat="server" Font-Size="Small" ForeColor="Black" Width="123px">
+                                                    <HoverNodeStyle ForeColor="Silver" />
+                                                    <Nodes>
+                                                        <asp:TreeNode NavigateUrl="~/staff_acalls.aspx" Text="Calls" Value="New Node"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_calls.aspx" Text="Locked Calls" Value="Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_apps.aspx" Text="Appointments" Value="All Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_aapps.aspx" Text="Locked Appointments" Value="All Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_track.aspx?load=first_start" Text="Request Tracking" Value="All Locked Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_payment.aspx" Text="Payments" Value="Locked Tickets"></asp:TreeNode>
+                                                    </Nodes>
+                                                </asp:TreeView>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Content>
+                        </cc1:AccordionPane>
+                        <cc1:AccordionPane ID="AccordionPane1" runat="server">
+                            <Header>
+                                <table id="TABLE1" border="0" cellpadding="0" cellspacing="0" onclick="return TABLE1_onclick()"
+                                    style="border-right: steelblue 1px solid; border-top: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: white; border-bottom: steelblue 1px solid; background-color: steelblue"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 66px; height: 15px"></td>
+                                            <td style="width: 39px; height: 15px">Staff</td>
+                                            <td style="width: 100px; height: 15px">Menu</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Header>
+                            <Content>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-top: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: steelblue; background-color: whitesmoke"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 19px; height: 15px"></td>
+                                            <td style="width: 34px; height: 15px">Staff</td>
+                                            <td style="width: 100px; height: 15px">Mailbox</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-bottom-width: 1px; border-bottom-color: steelblue; border-left: steelblue 1px solid; border-top-style: none"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 15px"></td>
+                                            <td style="width: 100px">
+                                                <asp:TreeView ID="TreeView3" runat="server" BorderStyle="None" BorderWidth="0px"
+                                                    Font-Size="Small" ForeColor="Black" Style="border-left-width: 1px; border-left-color: steelblue; border-top-style: none; border-right-width: 1px; border-right-color: steelblue; border-bottom-style: none"
+                                                    Width="152px">
+                                                    <HoverNodeStyle ForeColor="Silver" />
+                                                    <Nodes>
+                                                        <asp:TreeNode NavigateUrl="~/staff_msgbox.aspx" Text="Inbox" Value="New Node"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_mcompose.aspx" Text="Compose Message" Value="Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_draftbox.aspx" Text="Drafts" Value="All Held Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_sentbox.aspx" Text="Sent Items" Value="Locked Tickets"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_delbox.aspx" Text="Deleted Items" Value="All Locked Tickets"></asp:TreeNode>
+                                                    </Nodes>
+                                                </asp:TreeView>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: steelblue; background-color: whitesmoke"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 27px; height: 14px"></td>
+                                            <td style="width: 32px; height: 14px">Staff</td>
+                                            <td style="width: 100px; height: 14px">Organizer</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-bottom-width: 1px; border-bottom-color: steelblue; border-left: steelblue 1px solid"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 1px"></td>
+                                            <td style="width: 100px">
+                                                <asp:TreeView ID="TreeView5" runat="server" Font-Size="Small" ForeColor="Black" Width="123px">
+                                                    <HoverNodeStyle ForeColor="Silver" />
+                                                    <Nodes>
+                                                        <asp:TreeNode NavigateUrl="~/staff_schedule.aspx" Text="Schedule" Value="New Node"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_my_notes.aspx" Text="My Notes" Value="Held Tickets"></asp:TreeNode>
+                                                    </Nodes>
+                                                </asp:TreeView>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; font-weight: bold; font-size: small; border-left: steelblue 1px solid; color: steelblue; border-top-style: none; background-color: whitesmoke; border-bottom-style: none"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 11px; height: 14px"></td>
+                                            <td style="width: 5px; height: 14px"></td>
+                                            <td style="width: 100px; height: 14px">Directory</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table border="0" cellpadding="0" cellspacing="0" style="border-right: steelblue 1px solid; border-left: steelblue 1px solid; border-bottom: steelblue 1px solid"
+                                    width="157">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 2px; height: 65px"></td>
+                                            <td style="width: 100px; height: 65px">
+                                                <asp:TreeView ID="TreeView6" runat="server" Font-Size="Small" ForeColor="Black" Width="123px">
+                                                    <HoverNodeStyle ForeColor="Silver" />
+                                                    <Nodes>
+                                                        <asp:TreeNode NavigateUrl="~/staff_staffdir.aspx" Text="Staff Directory" Value="New Node"></asp:TreeNode>
+                                                        <asp:TreeNode NavigateUrl="~/staff_custdir.aspx" Text="Customer Directory" Value="Held Tickets"></asp:TreeNode>
+                                                    </Nodes>
+                                                </asp:TreeView>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </Content>
+                        </cc1:AccordionPane>
+                    </Panes>
+                </cc1:Accordion>
+                &nbsp;
+            </div>
+            <div style="z-index: 105; left: 804px; width: 126px; position: absolute; top: 394px; height: 100px">
+                <table border="0" cellspacing="0">
+                    <tr>
+                        <td rowspan="1" style="font-weight: bold; font-size: small; width: 100px; color: white; height: 17px; background-color: steelblue">NotePad</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px; height: 126px">
+                            <asp:TextBox ID="TextBox1" runat="server" EnableTheming="True" Height="152px" TextMode="MultiLine"
+                                Width="175px"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 181px">
+                                <tr>
+                                    <td style="height: 21px" valign="top">
+                                        <asp:Image ID="Image1" runat="server" Height="17px" ImageUrl="~/Images/sav_note2.jpg" />
+                                        <asp:LinkButton ID="sav_but" runat="server" CssClass="bar_format" Font-Bold="True"
+                                            Font-Size="Small" Font-Underline="False" ForeColor="OliveDrab" Height="19px"
+                                            OnClick="sav_but_Click" Width="24px">Save</asp:LinkButton></td>
+                                    <td style="width: 100px; height: 21px">
+                                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                            <ContentTemplate>
+                                                <asp:ImageButton ID="ImageButton22" runat="server" ImageUrl="~/Images/notes_img.jpg"
+                                                    OnClick="ImageButton22_Click" />
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="z-index: 106; left: 803px; width: 100px; position: absolute; top: 164px; height: 100px">
+                <cc1:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Height="185px"
+                    ScrollBars="Vertical" Width="184px">
+                    <cc1:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
+                        <HeaderTemplate>
+                            Staff
+                        </HeaderTemplate>
+                        <ContentTemplate>
+                            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" BorderStyle="None"
+                                BorderWidth="0px" DataSourceID="SqlDataSource101" Font-Size="Small" Width="148px">
+                                <Columns>
+                                    <asp:BoundField DataField="user_id" HeaderText="Staff ID" SortExpression="user_id">
+                                        <HeaderStyle HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Expr2" HeaderText="Locks" SortExpression="Expr2">
+                                        <HeaderStyle HorizontalAlign="Left" Width="25px" />
+                                        <ItemStyle ForeColor="OliveDrab" HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                </Columns>
+                                <HeaderStyle BorderStyle="None" ForeColor="SteelBlue" />
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource101" runat="server" ConnectionString="<%$ ConnectionStrings:CRM_dbConnectionString %>"
+                                SelectCommand="SELECT     a.user_id, a.loc_count,&#13;&#10;                          (SELECT     COUNT(b.loc_by) AS Expr1&#13;&#10;                            FROM          staff_loc AS b&#13;&#10;                            WHERE      (b.loc_by <> 'none') AND (b.loc_by = a.user_id)) AS Expr2&#13;&#10;FROM         activ_users AS a WHERE user_type='staff'"></asp:SqlDataSource>
+                        </ContentTemplate>
+                    </cc1:TabPanel>
+                    <cc1:TabPanel ID="TabPanel2" runat="server" HeaderText="TabPanel2">
+                        <HeaderTemplate>
+                            Customers
+                        </HeaderTemplate>
+                        <ContentTemplate>
+                            <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" BorderStyle="None"
+                                BorderWidth="0px" DataSourceID="SqlDataSource102" Font-Size="Small" Width="148px">
+                                <Columns>
+                                    <asp:BoundField DataField="user_id" HeaderText="Customer's ID" SortExpression="user_id">
+                                        <HeaderStyle ForeColor="SteelBlue" HorizontalAlign="Left" />
+                                    </asp:BoundField>
+                                </Columns>
+                                <HeaderStyle BorderStyle="None" ForeColor="SteelBlue" />
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource102" runat="server" ConnectionString="<%$ ConnectionStrings:CRM_dbConnectionString %>"
+                                SelectCommand="SELECT     a.user_id&#13;&#10;FROM         activ_users AS a WHERE user_type='cust'"></asp:SqlDataSource>
+                        </ContentTemplate>
+                    </cc1:TabPanel>
+                </cc1:TabContainer>
+            </div>
+            <div style="z-index: 107; left: 267px; width: 534px; position: absolute; top: 120px; height: 14px">
+                <table>
+                    <tr>
+                        <td style="width: 1633px; height: 26px" valign="middle"></td>
+                        <td style="width: 100px; height: 26px">
+                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox></td>
+                        <td style="width: 45px; height: 26px">
+                            <asp:LinkButton ID="LinkButton4" runat="server" BackColor="Ivory" BorderColor="OliveDrab"
+                                BorderWidth="1px" CssClass="bar_format" Font-Bold="True" Font-Size="Small" Font-Underline="False"
+                                ForeColor="OliveDrab" OnClick="LinkButton_cus_Click" Width="63px">Customer</asp:LinkButton></td>
+                        <td style="width: 89px; height: 26px">
+                            <asp:LinkButton ID="LinkButton5" runat="server" BackColor="Ivory" BorderColor="OliveDrab"
+                                BorderWidth="1px" CssClass="bar_format" Font-Bold="True" Font-Size="Small" Font-Underline="False"
+                                ForeColor="OliveDrab" OnClick="LinkButton_tkt_Click" Width="50px">Ticket</asp:LinkButton></td>
+                        <td align="right" style="width: 1076px; height: 26px">
+                            <asp:LinkButton ID="LinkButton6" runat="server" CssClass="bar_format" Font-Bold="True"
+                                Font-Size="X-Small" Font-Underline="False" ForeColor="OliveDrab" Height="1px"
+                                OnClick="LinkButton1_Click" PostBackUrl="~/staff_edit_prof.aspx" Width="63px">Edit Profile</asp:LinkButton></td>
+                        <td style="width: 5px; height: 26px" valign="bottom">
+                            <img src="Images/lint_v.jpg" style="width: 2px; height: 14px" /></td>
+                        <td style="width: 184px; height: 26px">
+                            <asp:LinkButton ID="LinkButton7" runat="server" CssClass="bar_format" Font-Bold="True"
+                                Font-Size="Small" Font-Underline="False" ForeColor="Silver" Height="1px" OnClick="LinkButton2_Click"
+                                Width="53px">Sign Out</asp:LinkButton></td>
+                    </tr>
+                </table>
+                <div style="z-index: 102; left: 462px; width: 77px; position: absolute; top: -3px; height: 100px">
+                    <table>
+                        <tr>
+                            <td style="width: 31px"></td>
+                            <td style="width: 100px">
+                                <asp:Label ID="Label12" runat="server" Font-Size="8pt" Font-Underline="True" Width="91px"></asp:Label></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style="z-index: 108; left: 164px; width: 30px; position: absolute; top: 85px; height: 378px">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <table style="width: 38px" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="width: 100px; height: 19px;" align="right">
+                                        <?xml namespace="" ns="urn:schemas-microsoft-com:vml" prefix="v" ?>
+                                        <?xml namespace="" prefix="v" ?>
+                                        <?xml namespace="" prefix="v" ?>
+                                        <?xml namespace="" prefix="v" ?>
+                                        <v:shapetype id="_x0000_t176" adj="2700" coordsize="21600,21600" o:spt="176" path="m@0,qx0@0l0@2qy@0,21600l@1,21600qx21600@2l21600@0qy@1,xe"><v:stroke joinstyle="miter"></v:stroke><v:formulas><v:f eqn="val #0"></v:f><v:f eqn="sum width 0 #0"></v:f><v:f eqn="sum height 0 #0"></v:f><v:f eqn="prod @0 2929 10000"></v:f><v:f eqn="sum width 0 @3"></v:f><v:f eqn="sum height 0 @3"></v:f><v:f eqn="val width"></v:f><v:f eqn="val height"></v:f><v:f eqn="prod width 1 2"></v:f><v:f eqn="prod height 1 2"></v:f></v:formulas><v:path gradientshapeok="t" limo="10800,10800" o:connecttype="custom" o:connectlocs="@8,0;0,@9;@8,@7;@6,@9" textboxrect="@3,@3,@4,@5"></v:path></v:shapetype>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100px; height: 21px;"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px; height: 21px"></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 100px" align="right">
+                                        <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Images/user_inbox.jpg"
+                                            OnClick="ImageButton2_Click" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px">
+                                        <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/Images/user_calls.jpg" OnClick="ImageButton3_Click" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px">
+                                        <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/Images/user_compose.jpg" OnClick="ImageButton4_Click" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px">
+                                        <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/Images/user_products.jpg" OnClick="ImageButton5_Click" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px">
+                                        <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/Images/user_profile.jpg" OnClick="ImageButton6_Click" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px">
+                                        <asp:ImageButton ID="ImageButton7" runat="server" ImageUrl="~/Images/user_payments.jpg" OnClick="ImageButton7_Click" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="width: 100px; height: 89px;">
+                                        <asp:ImageButton ID="ImageButton8" runat="server" ImageUrl="~/Images/user_appointments.jpg" OnClick="ImageButton8_Click" /></td>
+                                </tr>
+                            </table>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </asp:ContentPlaceHolder>
+            </div>
+            &nbsp;
+        <div id="DIV2" onclick="return DIV2_onclick()" style="z-index: 110; left: 5px; width: 152px; position: absolute; top: 460px; height: 100px">
+            <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                <ContentTemplate>
+                    <table border="0" cellpadding="0" cellspacing="0" style="height: 3px">
+                        <tr>
+                            <td style="width: 110px">
+                                <asp:Label ID="Label7" runat="server" Font-Bold="True" Font-Size="Small" Font-Underline="True"
+                                    ForeColor="DarkGray" Text="Alert Panel" Width="150px"></asp:Label></td>
+                            <td style="width: 100px">
+                                <br />
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width: 179px">
+                        <tr>
+                            <td style="width: 1px">
+                                <asp:Label ID="Label1" runat="server" Font-Size="Small" Text="Messages:" Width="46px"></asp:Label></td>
+                            <td style="width: 3px">
+                                <asp:Label ID="Label3" runat="server" Font-Size="Small" ForeColor="SteelBlue" Width="1px"></asp:Label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1px">
+                                <asp:Label ID="Label4" runat="server" Font-Size="Small" Text="Today's Schedule:"
+                                    Width="100px"></asp:Label></td>
+                            <td style="width: 3px">
+                                <asp:Label ID="Label6" runat="server" Font-Size="Small" ForeColor="SteelBlue" Width="1px"></asp:Label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1px">
+                                <asp:Label ID="Label2" runat="server" Font-Size="Small" Text="Locked Items:" Width="93px"></asp:Label></td>
+                            <td style="width: 3px">
+                                <asp:Label ID="Label5" runat="server" Font-Size="Small" ForeColor="SteelBlue" Width="2px"></asp:Label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1px">
+                                <asp:LinkButton ID="LinkButton3" runat="server" CssClass="bar_format" Font-Bold="False"
+                                    Font-Size="X-Small" Font-Underline="False" ForeColor="DarkGoldenrod" OnClick="LinkButton3_Click"
+                                    Width="102px">(Unlock all locked items)</asp:LinkButton></td>
+                            <td colspan="2">
+                                <asp:LinkButton ID="LinkButton44" runat="server" CssClass="bar_format" Font-Bold="False"
+                                    Font-Size="X-Small" Font-Underline="False" ForeColor="Firebrick" OnClick="LinkButton44_Click"
+                                    Width="47px">(Start Chat)</asp:LinkButton></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 1px">
+                                <asp:Label ID="Label8" runat="server" Font-Size="Small" Text="Chatters Waiting:"
+                                    Width="94px"></asp:Label></td>
+                            <td style="width: 3px">
+                                <asp:Label ID="Label9" runat="server" Font-Size="Small" ForeColor="SteelBlue" Width="2px"></asp:Label></td>
+                            <td>
+                                <asp:ImageButton ID="ImageButton33" runat="server" Height="20px" ImageUrl="~/Images/c_a.jpg"
+                                    OnClick="ImageButton33_Click" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" valign="top">&nbsp;</td>
+                            <td colspan="1"></td>
+                        </tr>
+                    </table>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+            <div id="DIV1" onclick="return DIV1_onclick()" style="z-index: 109; left: 21px; width: 961px; position: absolute; top: 595px; height: 1px">
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <asp:SqlDataSource ID="SqlDataSource11" runat="server" ConnectionString="<%$ ConnectionStrings:CRM_dbConnectionString %>"
+                            SelectCommand="SELECT * FROM [my_notes] WHERE ([user_name] = @user_name) ORDER BY note_id DESC">
+                            <SelectParameters>
+                                <asp:SessionParameter Name="user_name" SessionField="user_session" Type="String" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <asp:DataList ID="DataList1" runat="server" DataKeyField="note_id" DataSourceID="SqlDataSource11"
+                            Font-Size="Small" Visible="False" Width="956px">
+                            <ItemTemplate>
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="font-weight: bold; width: 145px; color: olivedrab; background-color: whitesmoke">Note Sno.</td>
+                                        <td style="font-weight: bold; width: 981px; color: olivedrab; background-color: whitesmoke">
+                                            <asp:Label ID="note_idLabel" runat="server" ForeColor="SteelBlue" Text='<%# Eval("note_id") %>'></asp:Label></td>
+                                        <td align="right" style="font-weight: bold; width: 981px; color: olivedrab; background-color: whitesmoke"></td>
+                                        <td align="right" style="font-weight: bold; width: 981px; color: olivedrab; background-color: whitesmoke">
+                                            <asp:Label ID="date_timeLabel" runat="server" Text='<%# Eval("date_time") %>' Width="158px"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <asp:TextBox ID="TextBox3" runat="server" BorderStyle="Dotted" Font-Size="Small"
+                                                Height="54px" Text='<%# Eval("note_txt") %>' TextMode="MultiLine" Width="955px"></asp:TextBox></td>
+                                    </tr>
+                                </table>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

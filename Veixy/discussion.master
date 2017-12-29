@@ -1,0 +1,133 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="discussion.master.cs" Inherits="top_mp" %>
+
+<%@ Register Assembly="RadMenu.Net2" Namespace="Telerik.WebControls" TagPrefix="rad" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="My_StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript">
+function IMG1_onclick() {
+
+}
+    </script>
+</head>
+<body style="font-size: small">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="True">
+        </asp:ScriptManager>
+        <div>
+            &nbsp;&nbsp;
+        <div style="z-index: 101; left: 167px; width: 775px; position: absolute; top: 223px; height: 234px">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+            &nbsp;&nbsp;
+        <div style="z-index: 102; left: 9px; width: 100px; position: absolute; top: 8px; height: 100px">
+            <img src="Images_Net/discuss.jpg" />
+        </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div style="z-index: 104; left: 169px; width: 770px; position: absolute; top: 188px; height: 17px">
+            Today is:
+            <asp:Label ID="label_date" runat="server" Text="Label" ForeColor="SteelBlue"></asp:Label>&nbsp;
+        </div>
+        <br />
+        <div style="z-index: 105; left: 169px; width: 772px; position: absolute; top: 195px; height: 1px">
+            <img src="Images/line2.jpg" style="width: 594px" />
+            <asp:LinkButton ID="LinkButton1" runat="server" Font-Underline="False" ForeColor="SteelBlue"
+                PostBackUrl="~/cust_settings.aspx">Settings</asp:LinkButton>
+            <img src="Images/lint_v.jpg" />
+            <asp:LinkButton ID="LinkButton2" runat="server" Font-Underline="False" ForeColor="SteelBlue"
+                OnClick="LinkButton2_Click">Logout</asp:LinkButton>
+            <img src="Images/lint_v.jpg" />
+            <asp:HyperLink ID="HyperLink2" runat="server" ForeColor="SteelBlue">Help</asp:HyperLink>
+            <img src="Images/help.jpg" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        &nbsp;
+        <div style="z-index: 103; left: 8px; width: 92px; position: absolute; top: 191px; height: 100px">
+            &nbsp;<rad:RadMenu ID="RadMenu1" runat="server" Flow="Vertical" Height="233px" OnItemClick="RadMenu1_ItemClick"
+                Skin="Telerik" Style="left: 3px; top: -21px" Width="145px">
+                <DefaultGroupSettings ExpandDirection="Right" />
+                <CollapseAnimation Type="OutSine" />
+                <ExpandAnimation Type="InSine" />
+                <Items>
+                    <rad:RadMenuItem runat="server" BorderColor="WhiteSmoke" Font-Bold="True" NavigateUrl="cust_main.aspx"
+                        Text="Home" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_inbox.aspx" Text="Inbox"
+                        Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_compose.aspx"
+                        Text="Compose" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_track.aspx" Text="Track Request"
+                        Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_products.aspx"
+                        Text="My Products" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_payment.aspx"
+                        Text="Payment Detail" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_callreq.aspx"
+                        Text="Call Back Request" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_mycall.aspx" Text="My Calls"
+                        Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_appoint.aspx"
+                        Text="Appointments" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" Text="Message Box" Width="143px">
+                        <GroupSettings ExpandDirection="Right" />
+                        <Items>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_msgbox.aspx" Text="Inbox" Width="120px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_mcompose.aspx?case=0" Text="Compose"
+                                Width="120px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_draftbox.aspx" Text="Drafts" Width="100px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_sentbox.aspx" Text="Sent Items"
+                                Width="100px">
+                            </rad:RadMenuItem>
+                            <rad:RadMenuItem runat="server" NavigateUrl="cust_delbox.aspx" Text="Deleted Items"
+                                Width="100px">
+                            </rad:RadMenuItem>
+                        </Items>
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server" Font-Bold="True" NavigateUrl="cust_complaint.aspx"
+                        Text="Complaint Box" Width="143px">
+                    </rad:RadMenuItem>
+                    <rad:RadMenuItem runat="server">
+                    </rad:RadMenuItem>
+                </Items>
+            </rad:RadMenu>
+            <div style="z-index: 102; left: 3px; width: 174px; position: absolute; top: 238px; height: 100px">
+                <img src="Images/menu_ext.jpg" style="width: 145px" />
+            </div>
+        </div>
+        &nbsp;
+    </form>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="admin_mp.master.cs" Inherits="staff_mp" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="My_StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script language="javascript" type="text/javascript">
+function DIV1_onclick() {
+
+}
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div style="z-index: 102; left: 221px; width: 768px; position: absolute; top: 11px; height: 4px; font-size: 2px; color: #6699ff; background-color: darkgray;">
+            </div>
+            <table style="width: 976px;">
+                <tr>
+                    <td style="width: 3px"></td>
+                    <td align="center" style="width: 6px"></td>
+                    <td style="width: 151px">
+                        <div style="z-index: 111; left: 39px; width: 100px; position: absolute; top: 2px; height: 100px">
+                            <img id="IMG1" onclick="return IMG1_onclick()" src="Images/logo_s.jpg" />
+                        </div>
+                    </td>
+                    <td colspan="4" align="right">
+                        <img src="Images/cp_head.jpg" /></td>
+                </tr>
+            </table>
+            <div style="z-index: 104; left: 839px; width: 143px; position: absolute; top: 71px; height: 311px; background-color: #f5faf1">
+                <table style="width: 140px">
+                    <tr>
+                        <td style="width: 17px"></td>
+                        <td style="width: 3px">
+                            <asp:Label ID="Label1" runat="server" Text="Today:" Width="29px"></asp:Label></td>
+                        <td style="width: 100px">
+                            <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label></td>
+                    </tr>
+                </table>
+                <br />
+                &nbsp;<br />
+                <br />
+                <br />
+                <table style="width: 140px">
+                    <tr>
+                        <td style="width: 19px"></td>
+                        <td colspan="2">
+                            <asp:Label ID="Label3" runat="server" Text="Activity Status" Width="88px" Font-Underline="True" ForeColor="Gray"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 19px; height: 19px"></td>
+                        <td colspan="2" style="color: white; height: 19px">...</td>
+                    </tr>
+                </table>
+                <table style="width: 140px">
+                    <tr>
+                        <td colspan="2">
+                            <asp:Label ID="Label4" runat="server" Text="Online Customers:" Width="108px"></asp:Label></td>
+                        <td style="width: 100px">
+                            <asp:Label ID="Label6" runat="server" Text="99" ForeColor="Gray"></asp:Label></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 56px">
+                            <asp:Label ID="Label5" runat="server" Text="Online Staff:" Width="72px"></asp:Label></td>
+                        <td style="width: 4px">
+                            <asp:Label ID="Label7" runat="server" Text="99" Width="30px" ForeColor="Gray"></asp:Label></td>
+                        <td style="width: 100px"></td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <table style="width: 140px">
+                    <tr>
+                        <td style="width: 345px"></td>
+                        <td style="width: 4px">
+                            <asp:LinkButton ID="LinkButton1" runat="server" Width="107px" OnClick="LinkButton1_Click">Admin Sign Out</asp:LinkButton></td>
+                        <td style="width: 100px"></td>
+                    </tr>
+                </table>
+                <img src="Images/admin_side.jpg" />
+            </div>
+            <br />
+            <div style="z-index: 103; left: 986px; width: 3px; position: absolute; top: 15px; height: 568px; font-size: 2px; background-color: steelblue;">
+                <div style="z-index: 102; left: -975px; width: 3px; position: absolute; top: -2px; height: 571px; font-size: 2px; background-color: steelblue;"
+                    id="DIV1" onclick="return DIV1_onclick()">
+                </div>
+            </div>
+            &nbsp;<br />
+            <br />
+            &nbsp;
+        <div style="z-index: 101; left: 17px; width: 820px; position: absolute; top: 69px; height: 79px">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        </div>
+    </form>
+</body>
+</html>

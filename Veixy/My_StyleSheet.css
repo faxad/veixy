@@ -1,0 +1,76 @@
+﻿body
+{
+	color: black;
+	font-family: 'Book Antiqua';
+	font-size: small;
+	line-height: normal;
+}
+div
+{
+	font-family: 'Book Antiqua';
+	font-size: small;
+	line-height: normal;
+}
+.bar_format
+{
+	color:black;
+	font-size:small;
+}
+.user_down
+{
+	background-color:#f2f9e7;
+}
+.gv_header
+{
+	background-image:url("Images/my_header.jpg");
+}
+.gv_footer
+{
+	background-image:url("Images/footerBg.gif");
+}
+.row_bg
+{
+	background-image:url("Images/tableBg.gif" );
+	background-repeat: no-repeat;
+}
+.msg_checked
+{
+	background-image:url("Images/msg_checked.jpg");
+}
+.msg_unchecked
+{
+	background-image:url("Images/msg_unchecked.jpg");
+}
+.no_scroll
+{
+	overflow:hidden;
+}
+
+.txt_boxx
+{
+	color:SteelBlue;
+	font-family:'Book Antiqua';
+	font-size:small;
+}
+.tables
+{
+	color:black;
+	font-family:'Book Antiqua';
+	font-size:small;
+}
+.gv_blue_header
+{
+	font-weight: bold;
+	font-size: small;
+	color: white;
+	background-color: steelblue;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+	border-bottom-style: none;
+}
+.form_view
+{
+	font-family:'Book Antiqua';
+	font-size:small;
+}
